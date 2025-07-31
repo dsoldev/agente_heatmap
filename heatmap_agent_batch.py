@@ -1,9 +1,12 @@
 import base64, json, asyncio, aiofiles, os
 from dotenv import find_dotenv, load_dotenv
+from tqdm import tqdm
 load_dotenv(find_dotenv())  # Carrega o arquivo .env local
 from pydantic import BaseModel, Field
 from typing import List
 import cv2
+from pathlib import Path
+
 
 COMPONENTS = {
     "duck": ["cabeça", "corpo", "asa/cauda"],                 # pato
@@ -122,8 +125,8 @@ def generate_batch_file(image_paths, obj_types, output_file="batch_requests.json
         obj_types = obj_types * len(image_paths)
     
     batch_requests = []
-    
-    for i, (image_path, obj_type) in enumerate(zip(image_paths, obj_types)):
+
+    for i, (image_path, obj_type) in tqdm(enumerate(zip(image_paths, obj_types)), total=len(image_paths)):
         custom_id = f"request_{i:04d}_{os.path.basename(image_path)}_{obj_type}"
         request = create_batch_request(image_path, obj_type, custom_id)
         batch_requests.append(request)
@@ -182,7 +185,10 @@ if __name__ == "__main__":
     #     # "000092.png"
     # ]
     # all files on duck dir
-    image_files = [os.path.join("duck", f) for f in os.listdir("duck") if f.endswith('.png')]
+    # image_files = [os.path.join("duck", f) for f in os.listdir("duck") if f.endswith('.png')]
+    image_files = sorted(Path("duck").rglob("*.png"))
+    print(image_files[0])
+
     print(f"Found {len(image_files)} images in 'duck' directory.")
     
     # Gerar arquivo JSONL para batch API
