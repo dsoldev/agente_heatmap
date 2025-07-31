@@ -63,7 +63,7 @@ STRUCTURED_OUTPUT_SCHEMA = {
 def encode_image(path):
     """Codifica imagem para base64 com redimensionamento."""
     img = cv2.imread(path)
-    print(path)
+    # print(path)
     img = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
     _, img_encoded = cv2.imencode('.png', img)
     img_b64 = base64.b64encode(img_encoded).decode()
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     # ]
     # all files on duck dir
     # image_files = [os.path.join("duck", f) for f in os.listdir("duck") if f.endswith('.png')]
-    image_files = sorted(Path("duck").rglob("*.png"))[:2]
+    image_files = sorted(Path("duck").rglob("*.png"))[:3]
     print(image_files[0])
 
     print(f"Found {len(image_files)} images in 'duck' directory.")
