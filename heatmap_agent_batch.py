@@ -63,6 +63,7 @@ STRUCTURED_OUTPUT_SCHEMA = {
 def encode_image(path):
     """Codifica imagem para base64 com redimensionamento."""
     img = cv2.imread(path)
+    print(path)
     img = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
     _, img_encoded = cv2.imencode('.png', img)
     img_b64 = base64.b64encode(img_encoded).decode()
@@ -127,7 +128,8 @@ def generate_batch_file(image_paths, obj_types, output_file="batch_requests.json
     batch_requests = []
 
     for i, (image_path, obj_type) in tqdm(enumerate(zip(image_paths, obj_types)), total=len(image_paths)):
-        custom_id = f"request_{i:04d}_{os.path.basename(image_path)}_{obj_type}"
+        name = str(image_path).replace('\\','-')
+        custom_id = f"request_{i:04d}_{name}_{obj_type}"
         request = create_batch_request(image_path, obj_type, custom_id)
         batch_requests.append(request)
     
@@ -186,7 +188,7 @@ if __name__ == "__main__":
     # ]
     # all files on duck dir
     # image_files = [os.path.join("duck", f) for f in os.listdir("duck") if f.endswith('.png')]
-    image_files = sorted(Path("duck").rglob("*.png"))
+    image_files = sorted(Path("duck").rglob("*.png"))[:2]
     print(image_files[0])
 
     print(f"Found {len(image_files)} images in 'duck' directory.")
