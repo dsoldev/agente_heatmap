@@ -178,30 +178,21 @@ async def analyse_image(path, obj_type):
     return response.component
 
 if __name__ == "__main__":
-    # Exemplo de uso para gerar batch
-    # image_files = [
-    #     "000588.png",
-    #     # "000413.png",
-    #     # "000399.png", 
-    #     # "000248.png",
-    #     # "000092.png"
-    # ]
-    # all files on duck dir
-    # image_files = [os.path.join("duck", f) for f in os.listdir("duck") if f.endswith('.png')]
-    image_files = sorted(Path("duck").rglob("*.png"))[:3]
+    object = "driller"
+    image_files = sorted(Path(object).rglob("*.png"))
     print(image_files[0])
 
-    print(f"Found {len(image_files)} images in 'duck' directory.")
-    
+    print(f"Found {len(image_files)} images in '{object}' directory.")
+
     # Gerar arquivo JSONL para batch API
-    generate_batch_file(image_files, ["duck"], "duck_analysis_batch.jsonl")
-    
+    generate_batch_file(image_files, [object], f"{object}_analysis_batch.jsonl")
+
     # fname = "000588.png"
     # print("=== TESTE 1 ===")
-    # result1 = asyncio.run(analyse_image(fname, "duck"))
+    # result1 = asyncio.run(analyse_image(fname, object))
     
     # print("\n=== TESTE 2 ===")
-    # result2 = asyncio.run(analyse_image(fname, "duck"))
+    # result2 = asyncio.run(analyse_image(fname, object))
     
     # print(f"\nResultado 1: {result1}")
     # print(f"Resultado 2: {result2}")
