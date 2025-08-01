@@ -10,7 +10,8 @@ from pathlib import Path
 
 COMPONENTS = {
     "duck": ["cabeça", "corpo", "asa/cauda"],                 # pato
-    "driller": ["empunhadura", "corpo", "cabeçote"]              # furadeira
+    "driller": ["empunhadura", "corpo", "cabeçote"],
+    "cat": ["cabeça", "corpo", "patas/cauda"],            # gato
 }
 
 class ImageAgentOutput(BaseModel):
@@ -178,7 +179,7 @@ async def analyse_image(path, obj_type):
     return response.component
 
 if __name__ == "__main__":
-    object = "driller"
+    object = "cat"
     image_files = sorted(Path(object).rglob("*.png"))
     print(image_files[0])
 
