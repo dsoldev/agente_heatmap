@@ -10,7 +10,7 @@ from pathlib import Path
 
 COMPONENTS = {
     "duck": ["cabeça", "corpo", "asa/cauda"],                 # pato
-    "drill": ["empunhadura", "corpo", "cabeçote"]              # furadeira
+    "driller": ["empunhadura", "corpo", "cabeçote"]              # furadeira
 }
 
 class ImageAgentOutput(BaseModel):
