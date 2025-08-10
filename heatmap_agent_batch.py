@@ -88,8 +88,8 @@ def create_batch_request(image_path, obj_type, custom_id=None):
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            "model": "gpt-4.1-mini",
-            "temperature": 0.0,
+            "model": "gpt-5-mini",
+            "temperature": 1,
             "seed": 42,  # Seed fixo para maior determinismo
             "response_format": STRUCTURED_OUTPUT_SCHEMA,
             "messages": [
@@ -179,14 +179,14 @@ async def analyse_image(path, obj_type):
     return response.component
 
 if __name__ == "__main__":
-    object = "cat"
-    image_files = sorted(Path(object).rglob("*.png"))
+    object_name = "driller"
+    image_files = sorted(Path(object_name).rglob("*.png"))
     print(image_files[0])
 
-    print(f"Found {len(image_files)} images in '{object}' directory.")
+    print(f"Found {len(image_files)} images in '{object_name}' directory.")
 
     # Gerar arquivo JSONL para batch API
-    generate_batch_file(image_files, [object], f"{object}_analysis_batch.jsonl")
+    generate_batch_file(image_files, [object_name], f"{object_name}_analysis_batch.jsonl")
 
     # fname = "000588.png"
     # print("=== TESTE 1 ===")
