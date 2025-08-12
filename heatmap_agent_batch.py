@@ -179,7 +179,7 @@ async def analyse_image(path, obj_type):
     return response.component
 
 if __name__ == "__main__":
-    object_name = "driller"
+    object_name = "duck"
     image_files = sorted(Path(object_name).rglob("*.png"))
     print(image_files[0])
 

@@ -67,7 +67,7 @@ def split_jsonl(path: str, max_mb: int = DEFAULT_MAX_MB) -> None:
     print(f"✅ Total de partes: {part_idx}")
 
 if __name__ == "__main__":
-    object_name = "driller"
+    object_name = "duck"
     jsonl_path = f"{object_name}_analysis_batch.jsonl"
     max_mb = 190
 
